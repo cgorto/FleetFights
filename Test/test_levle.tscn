@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3e2wy3nb8cug"]
+
+[ext_resource type="PackedScene" uid="uid://bjjk70h82e6km" path="res://Fleet/Fleet.tscn" id="1_cylsx"]
+
+[node name="TestLevle" type="Node2D"]
+
+[node name="Fleet" parent="." instance=ExtResource("1_cylsx")]
+z_index = 1
