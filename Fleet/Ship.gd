@@ -7,6 +7,7 @@ var fleet_usage: int = 1
 var max_items: int = 1
 var icon : Texture2D = load("res://Icons/ship_A.png")
 var sprite: Sprite2D
+var effect: PackedScene
 
 var base_stats: Dictionary = {
 	"health": 100,
@@ -29,7 +30,7 @@ func _physics_process(delta):
 
 
 
-func _init( _name: String = "Ship", _icon: Texture2D = load("res://Icons/ship_A.png"), _stats: Dictionary = base_stats, _max_items: int = 1):
+func _init( _name: String = "Ship", _icon: Texture2D = load("res://Icons/ship_A.png"), _stats: Dictionary = base_stats, _max_items: int = 1, _effect: PackedScene = null):
 	ship_name = _name
 	icon = _icon
 	stats = _stats
@@ -39,6 +40,11 @@ func _init( _name: String = "Ship", _icon: Texture2D = load("res://Icons/ship_A.
 	_sprite.centered = true
 	add_child(_sprite)
 	sprite = _sprite
+	effect = _effect
+	if effect:
+		var effect_instance = effect.instantiate()
+		add_child(effect_instance)
+
 
 	
 

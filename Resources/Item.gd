@@ -1,11 +1,11 @@
 extends Node
 class_name Item
 
-@export var ItemID : String
-@export var Icon : Texture2D
+@export var itemID : String
+@export var icon : Texture2D
 @export var Name : String
-@export var Rarity: ItemRarity = ItemRarity.Common
-@export var Synergy = 0 #change this
+@export var rarity: ItemRarity = ItemRarity.Common
+@export var synergy = 0 #change this
 
 enum ItemRarity {
     Common,
@@ -20,3 +20,9 @@ enum ItemState {
     Equipped,
     Stored
 }
+
+func _init(_name: String, _icon: Texture2D, _rarity: ItemRarity = ItemRarity.Common, _synergy: int = 0):
+	name = _name
+	icon = _icon
+	rarity = _rarity
+	synergy = _synergy

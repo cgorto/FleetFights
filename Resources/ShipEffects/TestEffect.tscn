@@ -1,0 +1,40 @@
+[gd_scene load_steps=10 format=3 uid="uid://b1o82lglcsk4a"]
+
+[ext_resource type="Script" path="res://Resources/ShipEffects/TestEffect.gd" id="1_ulw5j"]
+
+[sub_resource type="Gradient" id="Gradient_flftj"]
+offsets = PackedFloat32Array(0, 0.468254, 1)
+colors = PackedColorArray(0.243695, 0.443175, 0.799989, 1, 1, 0.466667, 0.466667, 0.533333, 1, 0.227451, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1kflu"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pjdu4"]
+color_ramp = SubResource("Gradient_flftj")
+noise = SubResource("FastNoiseLite_1kflu")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1c43w"]
+albedo_texture = SubResource("NoiseTexture2D_pjdu4")
+normal_enabled = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_cjai6"]
+material = SubResource("StandardMaterial3D_1c43w")
+
+[sub_resource type="Gradient" id="Gradient_3bsoi"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_61kjq"]
+domain_warp_enabled = true
+metadata/_preview_in_3d_space_ = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wipcb"]
+color_ramp = SubResource("Gradient_3bsoi")
+noise = SubResource("FastNoiseLite_61kjq")
+
+[node name="TestEffect" type="Node2D"]
+z_index = -2
+script = ExtResource("1_ulw5j")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+position = Vector2(1, 1.90735e-06)
+scale = Vector2(64.5726, 32.75)
+mesh = SubResource("SphereMesh_cjai6")
+texture = SubResource("NoiseTexture2D_wipcb")

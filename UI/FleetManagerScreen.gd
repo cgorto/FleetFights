@@ -39,7 +39,13 @@ func update_ship_details(ship: Ship) -> void:
 
 func _on_add_ship_pressed():
 	#create new instance of ship
-	if FleetManager.add_ship(Ship.new("New Ship" + str(randi_range(1,100)), load(icon_dict.get((randi_range(1,7)))), {"health": randf_range(1,100), "speed": randf_range(1,100)})):
+	if FleetManager.add_ship(Ship.new(
+		"New Ship" + str(randi_range(1,100)),
+		 load(icon_dict.get((randi_range(1,7)))),
+		 {"health": randf_range(1,100), "speed": randf_range(1,100)},
+		1,
+		load("res://Resources/ShipEffects/TestEffect.tscn")
+		)):
 		update_ship_list(FleetManager.ships)
 
 
