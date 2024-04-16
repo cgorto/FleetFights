@@ -1,8 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://d3e2wy3nb8cug"]
+[gd_scene load_steps=5 format=3 uid="uid://d3e2wy3nb8cug"]
 
 [ext_resource type="PackedScene" uid="uid://bjjk70h82e6km" path="res://Fleet/Fleet.tscn" id="1_cylsx"]
+
+[sub_resource type="Gradient" id="Gradient_pukfm"]
+offsets = PackedFloat32Array(0, 0.5, 0.759036, 0.981928)
+colors = PackedColorArray(0.144628, 0.018653, 0.188537, 1, 0.232244, 0.362475, 0.364486, 1, 0.536773, 0.54718, 0.402683, 1, 0.692318, 0.70688, 0.967035, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_yn7pa"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_g77sd"]
+color_ramp = SubResource("Gradient_pukfm")
+noise = SubResource("FastNoiseLite_yn7pa")
 
 [node name="TestLevle" type="Node2D"]
 
 [node name="Fleet" parent="." instance=ExtResource("1_cylsx")]
 z_index = 1
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(-2.00011, 8.50002)
+scale = Vector2(12.3047, 7.04883)
+texture = SubResource("NoiseTexture2D_g77sd")

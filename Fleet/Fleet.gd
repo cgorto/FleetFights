@@ -1,14 +1,20 @@
 extends CharacterBody2D
 
-var SPEED = 10
-var accel = 1
+var SPEED = 500
+var accel = 5
 
 # Called when the node enters the scene tree for the first time.
+
 func _ready():
 	spawn_fleet()
 
 func _physics_process(delta):
 	handle_movement(delta)
+	move_and_slide()
+
+	#for ship in FleetManager.ships:
+		#ship.calculate_boid_steering()
+		#ship.move_and_slide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -28,10 +34,12 @@ func handle_movement(delta):
 
 func spawn_fleet():
 	for ship in FleetManager.ships:
-		$ShipList.add_item(ship.ship_name,ship.icon)
-		
+		if ship.get_parent():
+			ship.get_parent().remove_child(ship)
 		add_child(ship)
-		#Vector2(randf_range(-5,-5),randf_range(-5,5))
+		$ShipList.add_item(ship.ship_name,ship.icon)
+		ship.add_to_group("InFleet")
+		ship.position = Vector2(randf_range(-100,100),randf_range(-100,100))
 		
 
 
