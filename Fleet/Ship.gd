@@ -47,7 +47,7 @@ func _init( _name: String = "Ship", _icon: Texture2D = load("res://Icons/ship_A.
 
 
 	
-
+## Equips a given item to the ship
 func equip_item(item) -> bool:
 	if equipped_items.size() < max_items:
 		equipped_items.append(item)
@@ -55,6 +55,7 @@ func equip_item(item) -> bool:
 		return true
 	return false
 
+## Removes a given item from the ship
 func unequip_item(item) -> bool:
 	if equipped_items.has(item):
 		equipped_items.erase(item)
@@ -65,10 +66,14 @@ func unequip_item(item) -> bool:
 		return true
 	return false
 
+
+## Modifies the stats of the ship based off of the given stats dictionary
 func modify_stats(_stats: Dictionary) -> void:
 	for key in _stats.keys():
 		self.stats[key] += _stats[key]
 
+
+## Returns the value of a given stat
 func get_detail(_name: String) -> String:
 	match _name:
 		"health":
@@ -93,6 +98,8 @@ var a_coef = 1.0
 var c_coef = 1.0
 var bound = 200
 
+
+## Calculates separation for boid calcs
 func separation() -> Vector2:
 	var steer = Vector2.ZERO
 	var count = 0
@@ -106,6 +113,7 @@ func separation() -> Vector2:
 		steer /= count
 	return steer.normalized()
 
+## Calculates alignment for boid calcs
 func alignment() -> Vector2:
 	var sum = Vector2.ZERO
 	var count = 0
@@ -119,6 +127,7 @@ func alignment() -> Vector2:
 	var fleet_alignment = get_parent().velocity
 	return (local_alignment + fleet_alignment) * 0.5
 
+## Calculates cohesion for boid calcs
 func cohesion() -> Vector2:
 	var sum = Vector2.ZERO
 	var count = 0
@@ -133,7 +142,7 @@ func cohesion() -> Vector2:
 func keep_bounds():
 	pass
 
-
+## Updates velocity baesd on boid behavior
 func calculate_boid_steering() -> void:
 	var sep = separation() * s_coef
 	var ali = alignment() * a_coef

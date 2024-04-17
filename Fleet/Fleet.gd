@@ -16,10 +16,11 @@ func _physics_process(delta):
 		#ship.calculate_boid_steering()
 		#ship.move_and_slide()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
+
+## Handles WASD movement and updates velocity
 func handle_movement(delta):
 	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var direction = input_dir.normalized()
@@ -32,6 +33,8 @@ func handle_movement(delta):
 		velocity.x = lerp(velocity.x,0.0, accel * delta)
 		velocity.y = lerp(velocity.y,0.0,accel * delta)
 
+
+## Spawns the entire fleet held in the fleet manager
 func spawn_fleet():
 	for ship in FleetManager.ships:
 		if ship.get_parent():
