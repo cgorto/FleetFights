@@ -45,8 +45,17 @@ func _init( _name: String = "Ship", _icon: Texture2D = load("res://Icons/ship_A.
 		var effect_instance = effect.instantiate()
 		add_child(effect_instance)
 
+## Damages the ship based on the damage value
+## @experimental
+func damage(damage: int) -> void:
+	stats["health"] -= damage
+	if stats["health"] <= 0:
+		death()
 
-	
+func death() -> void:
+	emit_signal("death")
+
+
 ## Equips a given item to the ship
 func equip_item(item) -> bool:
 	if equipped_items.size() < max_items:
@@ -82,6 +91,10 @@ func get_detail(_name: String) -> String:
 			return str(stats["speed"])
 		_:
 			return ""
+
+#this function will add synergy, and add this ship to synergy group on fleet manager, emit signal to update the other ships
+func add_synergy(synergy: Synergy) -> void:
+	synergy.add_effects(self, )
 
 
 func _on_aggro(target: Node2D) -> void:
