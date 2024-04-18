@@ -3,6 +3,9 @@ extends Control
 @onready var ship_list = $HBoxContainer/ShipListSection/ShipList
 @onready var ship_details = $HBoxContainer/DetailsAndItems/DetailsArea/ShipDetails
 @onready var item_slots = $HBoxContainer/DetailsAndItems/DetailsArea/ItemSlots
+@onready var syn_list = $HBoxContainer/DetailsAndItems/DetailsArea/ItemSlots/ItemList
+
+var current_index: int = 0
 
 # Called when the node enters the scene tree for the first time.
 var icon_dict = {
@@ -28,6 +31,7 @@ func update_ship_list(ships: Array[Ship]) -> void:
 
 func _on_ship_list_item_selected(index):
 	var selected_ship = FleetManager.ships[index]
+	current_index = index
 	update_ship_details(selected_ship)
 
 func update_ship_details(ship: Ship) -> void:
@@ -52,3 +56,15 @@ func _on_add_ship_pressed():
 func _on_level_pressed():
 	get_tree().change_scene_to_file("res://Test/test_levle.tscn")
 
+
+
+func _on_button_pressed():
+	var test_synergy = preload("res://Resources/Synergy/TestSynergy1.tres")
+	test_synergy.synergy_name = "NotNull"
+	var new_item = Item.new("New Item", load("res://Icons/ship_A.png"), Item.ItemRarity.Common, test_synergy)
+	FleetManager.ships[current_index].equip_item(new_item)
+	for ship in FleetManager.ships:
+		if ship.is_inside_tree():
+			print("graaah")
+	get_tree().get_nodes_in_group(test_synergy.synergy_name)
+	

@@ -17,8 +17,10 @@ var base_stats: Dictionary = {
 
 @onready var stats = base_stats.duplicate()
 
+signal update_synergy(synergy: Synergy)
+
 var equipped_items: Array = []
-var synergies: Array = []
+var synergy_effects: Dictionary = {} #Key: synergy name, value: array of effects
 
 var sprite_lerp = 5
 
@@ -47,8 +49,8 @@ func _init( _name: String = "Ship", _icon: Texture2D = load("res://Icons/ship_A.
 
 ## Damages the ship based on the damage value
 ## @experimental
-func damage(damage: int) -> void:
-	stats["health"] -= damage
+func damage(_damage: int) -> void:
+	stats["health"] -= _damage
 	if stats["health"] <= 0:
 		death()
 
@@ -61,6 +63,10 @@ func equip_item(item) -> bool:
 	if equipped_items.size() < max_items:
 		equipped_items.append(item)
 		modify_stats(item.stats)
+		add_to_group(item.synergy.synergy_name)
+		FleetManager.update_ship_synergy(item.synergy)
+		print("what's going on here!")
+		print(item.synergy.synergy_name)
 		return true
 	return false
 
@@ -72,6 +78,8 @@ func unequip_item(item) -> bool:
 		for stat in item.stats.keys():
 			negative_stats[stat] -= item.stats[stat]
 		modify_stats(negative_stats)
+		remove_from_group(item.synergy_name)
+		FleetManager.update_ship_synergy(item.synergy)
 		return true
 	return false
 
@@ -93,8 +101,6 @@ func get_detail(_name: String) -> String:
 			return ""
 
 #this function will add synergy, and add this ship to synergy group on fleet manager, emit signal to update the other ships
-func add_synergy(synergy: Synergy) -> void:
-	synergy.add_effects(self, )
 
 
 func _on_aggro(target: Node2D) -> void:

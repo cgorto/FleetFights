@@ -1,40 +1,41 @@
-extends Node
+extends Resource
 class_name Synergy
 
-var synergy_name: String
-var breakpoints: Array[int] = []
-var effects: Dictionary = {} #breakpoints to effects (int to packed scene)
+@export var synergy_name: String
+@export var breakpoints: Array[int] = []
+@export var effects: Dictionary = {} #breakpoints to effects (int to packed scene)
 
-func _init(_name: String, _breakpoints: Array[int], _effects: Dictionary):
-    synergy_name = _name
-    breakpoints = _breakpoints
-    effects = _effects
+func _init(_name: String = "", _breakpoints: Array[int] = [], _effects: Dictionary = {}) -> void:
+	synergy_name = _name
+	breakpoints = _breakpoints
+	effects = _effects
 
 ## Returns a list of effects that should be active based on the count
 func get_effects(count: int = 0) -> Array[PackedScene]:
-    var effect_list = []
-    for i in breakpoints:
-        if count >= i:
-            effect_list.append(effects[i])
-    return effect_list
+	var effect_list = []
+	for i in breakpoints:
+		if count >= i:
+			effect_list.append(effects[i])
+	return effect_list
 
-#UHHH be careful?? groups might be global??? so if there are issues, change the names of the groups in FleetManager.gd or here
-#I am also adding ships to a group on the fleet to keep track. This might interfere with that! vvv
+func apply_effects(target: Ship, count: int = 0) -> void:
+	var current_effects = target.synergy_effects.get(synergy_name, [])
+	var new_effects = get_effects(count)
+	var effects_to_remove = current_effects.difference(new_effects)
+	var effects_to_add = new_effects.difference(current_effects)
 
-## Adds synergy effects to a target node based on the count, also adds effects to group of synergy name
-func add_effects(target: Node, count: int = 0) -> void:
-    for effect in get_effects(count):
-        var effect_instance = effect.instantiate()
-        target.add_child(effect_instance)
-        target.add_to_group(synergy_name, effect_instance)
+	for effect_instance in effects_to_remove:
+		effect_instance.queue_free()
+		target.synergy_effects[synergy_name].erase(effect_instance)
 
-## Remove synergy effects from a target node based on the count
-func remove_effects(target: Node, count: int = 0) -> void:
-    var effects_to_keep = get_effects(count)
-    for effect in target.get_nodes_in_group(synergy_name):
-        if effect not in effects_to_keep: #This might not work since array is of packed scene and effect is node, but principle is the same
-            effect.queue_free()
-            
-func update_effects(target: Node, count: int = 0) -> void:
-    var new_effects = get_effects(count)
-    get_tree().call_group(synergy_name, "queue_free")
+	for effect in effects_to_add:
+		var effect_instance = effect.instantiate()
+		target.add_child(effect_instance)
+		target.synergy_effects[synergy_name].append(effect_instance)
+
+	if new_effects.size() == 0:
+		target.remove_from_group(synergy_name)
+	else:
+		target.add_to_group(synergy_name)
+
+	

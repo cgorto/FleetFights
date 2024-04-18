@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://j2cc0ootwn4l"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_s0ea0"]
+
+[node name="TestEffect2" type="Node2D"]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+position = Vector2(-4, 24)
+scale = Vector2(155.25, 137.25)
+mesh = SubResource("PrismMesh_s0ea0")

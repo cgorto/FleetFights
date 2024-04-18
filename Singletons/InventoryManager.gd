@@ -15,5 +15,5 @@ signal ship_unequipped(ship)
 
 
 func _ready():
-    set_physics_process(false)
+	set_physics_process(false)
 

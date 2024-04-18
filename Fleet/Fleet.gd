@@ -47,3 +47,12 @@ func spawn_fleet():
 
 
 
+
+
+func _on_button_pressed():
+	var children = get_children()
+	for child in children:
+		if child is Ship:
+			var grand_children = child.get_children()
+			for gc in grand_children:
+				print(gc.name)

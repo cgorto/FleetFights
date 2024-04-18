@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://om7gjkf0qy56"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_8yrdw"]
+
+[node name="TestEffect1" type="Node2D"]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+position = Vector2(-6, 0)
+scale = Vector2(85, 103.25)
+mesh = SubResource("TorusMesh_8yrdw")

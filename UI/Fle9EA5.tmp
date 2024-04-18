@@ -68,9 +68,6 @@ text = "Item Slots"
 layout_mode = 2
 text = "Add Item to ship"
 
-[node name="ItemList" type="ItemList" parent="HBoxContainer/DetailsAndItems/DetailsArea/ItemSlots"]
-layout_mode = 2
-
 [node name="TestBox" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 
