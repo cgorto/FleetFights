@@ -11,14 +11,13 @@ config_version=5
 [application]
 
 config/name="FleetFights"
-run/main_scene="res://UI/FleetManagerScreen.tscn"
+run/main_scene="res://Test/UI/FleetManagerScreen.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 FleetManager="*res://Singletons/FleetManager.gd"
-InventoryManager="*res://Singletons/InventoryManager.gd"
 
 [debug]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://d3e2wy3nb8cug"]
 
-[ext_resource type="PackedScene" uid="uid://bjjk70h82e6km" path="res://Fleet/Fleet.tscn" id="1_cylsx"]
+[ext_resource type="PackedScene" uid="uid://bjjk70h82e6km" path="res://Objects/Fleet/Fleet.tscn" id="1_cylsx"]
 
 [sub_resource type="Gradient" id="Gradient_pukfm"]
 offsets = PackedFloat32Array(0, 0.5, 0.759036, 0.981928)

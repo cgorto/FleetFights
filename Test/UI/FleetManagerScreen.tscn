@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c2n7cmlyu8rw"]
 
-[ext_resource type="Script" path="res://UI/FleetManagerScreen.gd" id="1_4lo8a"]
+[ext_resource type="Script" path="res://Test/UI/FleetManagerScreen.gd" id="1_4lo8a"]
 
 [sub_resource type="Theme" id="Theme_vk5s5"]
 

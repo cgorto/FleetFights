@@ -1,14 +1,14 @@
 extends CharacterBody2D
 
-var SPEED = 500
-var accel = 5
+var SPEED: float = 500
+var accel:float = 5
 
 # Called when the node enters the scene tree for the first time.
 
-func _ready():
+func _ready() -> void:
 	spawn_fleet()
 
-func _physics_process(delta):
+func _physics_process(delta) -> void:
 	handle_movement(delta)
 	move_and_slide()
 
@@ -16,14 +16,11 @@ func _physics_process(delta):
 		#ship.calculate_boid_steering()
 		#ship.move_and_slide()
 
-func _process(delta):
-	pass
-
 
 ## Handles WASD movement and updates velocity
-func handle_movement(delta):
-	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	var direction = input_dir.normalized()
+func handle_movement(delta) -> void:
+	var input_dir:Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	var direction:Vector2 = input_dir.normalized()
 	if direction:
 		velocity.x = lerp(velocity.x,direction.x * SPEED, accel * delta)
 		velocity.y = lerp(velocity.y,direction.y * SPEED,accel * delta)
@@ -35,7 +32,7 @@ func handle_movement(delta):
 
 
 ## Spawns the entire fleet held in the fleet manager
-func spawn_fleet():
+func spawn_fleet() -> void:
 	for ship in FleetManager.ships:
 		if ship.get_parent():
 			ship.get_parent().remove_child(ship)
@@ -45,14 +42,3 @@ func spawn_fleet():
 		ship.position = Vector2(randf_range(-100,100),randf_range(-100,100))
 		
 
-
-
-
-
-func _on_button_pressed():
-	var children = get_children()
-	for child in children:
-		if child is Ship:
-			var grand_children = child.get_children()
-			for gc in grand_children:
-				print(gc.name)

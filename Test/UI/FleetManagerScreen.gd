@@ -57,14 +57,3 @@ func _on_level_pressed():
 	get_tree().change_scene_to_file("res://Test/test_levle.tscn")
 
 
-
-func _on_button_pressed():
-	var test_synergy = preload("res://Resources/Synergy/TestSynergy1.tres")
-	test_synergy.synergy_name = "NotNull"
-	var new_item = Item.new("New Item", load("res://Icons/ship_A.png"), Item.ItemRarity.Common, test_synergy)
-	FleetManager.ships[current_index].equip_item(new_item)
-	for ship in FleetManager.ships:
-		if ship.is_inside_tree():
-			print("graaah")
-	get_tree().get_nodes_in_group(test_synergy.synergy_name)
-	
