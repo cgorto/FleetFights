@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://tjclsk3qo3co"]
-
-[ext_resource type="Script" path="res://Objects/Ship/Ship.gd" id="1_rsvro"]
-
-[node name="Ship" type="CharacterBody2D"]
-top_level = true
-collision_layer = 2
-motion_mode = 1
-script = ExtResource("1_rsvro")
