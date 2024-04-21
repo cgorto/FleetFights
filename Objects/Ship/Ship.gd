@@ -24,7 +24,7 @@ var synergy_effects: Dictionary = {}
 
 var sprite_lerp:float = 5
 
-func _physics_process(delta) -> void:
+func _physics_process(delta: float) -> void:
 	var fleet_velocity:Vector2 = get_parent().velocity
 	var target_velocity:Vector2 = fleet_velocity if fleet_velocity.length() > velocity.length() else velocity
 	if target_velocity != Vector2.ZERO:
@@ -60,3 +60,8 @@ func get_detail(_name: String) -> String:
 		_:
 			return ""
 
+func get_synergy(synergy: String) -> Node:
+	return get_meta(synergy)
+
+func has_synergy(synergy: String) -> bool:
+	return has_meta(synergy)

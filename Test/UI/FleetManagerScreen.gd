@@ -57,3 +57,10 @@ func _on_level_pressed():
 	get_tree().change_scene_to_file("res://Test/test_levle.tscn")
 
 
+
+
+func _Test_synergy_pressed():
+	var test_synergy = SynergyComponent.new(preload("res://Resources/Synergy/SynergyResource/Test.tres"))
+	FleetManager.ships[current_index].add_child(test_synergy)
+	print_orphan_nodes()
+	FleetManager.update_synergies(test_synergy.synergy.synergy_name)

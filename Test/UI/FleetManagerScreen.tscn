@@ -71,6 +71,10 @@ text = "Add Item to ship"
 [node name="ItemList" type="ItemList" parent="HBoxContainer/DetailsAndItems/DetailsArea/ItemSlots"]
 layout_mode = 2
 
+[node name="Button2" type="Button" parent="HBoxContainer/DetailsAndItems/DetailsArea/ItemSlots"]
+layout_mode = 2
+text = "Add Test Synergy"
+
 [node name="TestBox" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 
@@ -84,5 +88,6 @@ text = "Go to Level"
 
 [connection signal="item_selected" from="HBoxContainer/ShipListSection/ShipList" to="." method="_on_ship_list_item_selected"]
 [connection signal="pressed" from="HBoxContainer/DetailsAndItems/DetailsArea/ItemSlots/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/DetailsAndItems/DetailsArea/ItemSlots/Button2" to="." method="_Test_synergy_pressed"]
 [connection signal="pressed" from="HBoxContainer/TestBox/AddShip" to="." method="_on_add_ship_pressed"]
 [connection signal="pressed" from="HBoxContainer/TestBox/Level" to="." method="_on_level_pressed"]

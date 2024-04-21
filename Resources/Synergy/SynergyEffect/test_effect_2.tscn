@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://clyjnp4s7tkys"]
+
+[node name="TestEffect2" type="Node2D"]
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(63, -142)
+polygon = PackedVector2Array(2, 3, 63, 39, 36, 154, -79, 54)

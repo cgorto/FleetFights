@@ -36,3 +36,9 @@ func get_synergies_count(synergy_name: String) -> int:
 		if ship.has_meta(synergy_name):
 			count += 1
 	return count
+
+func update_synergies(synergy_name: String) -> void:
+	var count:int = get_synergies_count(synergy_name)
+	for ship in ships:
+		if ship.has_meta(synergy_name):
+			ship.get_synergy(synergy_name).update_effect(count)

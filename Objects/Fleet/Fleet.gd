@@ -8,7 +8,7 @@ var accel:float = 5
 func _ready() -> void:
 	spawn_fleet()
 
-func _physics_process(delta) -> void:
+func _physics_process(delta: float) -> void:
 	handle_movement(delta)
 	move_and_slide()
 
@@ -18,7 +18,7 @@ func _physics_process(delta) -> void:
 
 
 ## Handles WASD movement and updates velocity
-func handle_movement(delta) -> void:
+func handle_movement(delta: float) -> void:
 	var input_dir:Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var direction:Vector2 = input_dir.normalized()
 	if direction:
